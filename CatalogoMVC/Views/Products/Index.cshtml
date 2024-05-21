@@ -1,0 +1,96 @@
+﻿@model IEnumerable<ProductViewModel>
+
+<h2>Produtos</h2>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <div class="pull-left">
+                <a asp-action="CriarNovoProduto" class="btn btn-primary">
+                    <span title="Criar Produto" class="fas fa-plus"></span>
+                    Novo Produto
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<div class="panel panel-default">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Code)</th>
+                <th>@Html.DisplayNameFor(model => model.CategoryId)</th>
+                <th>@Html.DisplayNameFor(model => model.Description)</th>
+                <th>@Html.DisplayNameFor(model => model.Quantity)</th>
+                <th>@Html.DisplayNameFor(model => model.Supplier)</th>
+                <th>@Html.DisplayNameFor(model => model.Price)</th>
+                <th>@Html.DisplayNameFor(model => model.ExpirationDate)</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @{
+                // Definindo uma lista estática de categorias
+                var categorias = new Dictionary<int, string>
+                {
+                    { 2, "Bebidas" },
+                    { 3, "Frutas" },
+                    { 4, "Legumes" }
+                };
+            }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Code)
+                    </td>
+                    <td>
+                        @if (categorias.ContainsKey(item.CategoryId))
+                        {
+                            @categorias[item.CategoryId]
+                        }
+                        else
+                        {
+                            <text>Categoria Desconhecida</text>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Supplier)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExpirationDate.Date)
+                    </td>
+
+
+                    <td>
+                        <a asp-action="AtualizarProduto" asp-route-code="@item.Code">
+                            <span>Editar</span>
+                        </a>
+                        <a asp-action="DeletarProduto" asp-route-code="@item.Code">
+                            <span>Deletar</span>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+

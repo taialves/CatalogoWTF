@@ -460,3 +460,4 @@ D:\Tecnologia\Projetos\WTF\Catalogo\Catalogo.API\obj\Debug\net8.0\refint\Catalog
 D:\Tecnologia\Projetos\WTF\Catalogo\Catalogo.API\obj\Debug\net8.0\Catalogo.API.pdb
 D:\Tecnologia\Projetos\WTF\Catalogo\Catalogo.API\obj\Debug\net8.0\Catalogo.API.genruntimeconfig.cache
 D:\Tecnologia\Projetos\WTF\Catalogo\Catalogo.API\obj\Debug\net8.0\ref\Catalogo.API.dll
+D:\Tecnologia\Projetos\WTF\Catalogo\Catalogo.API\obj\Debug\net8.0\Catalogo.API.sourcelink.json

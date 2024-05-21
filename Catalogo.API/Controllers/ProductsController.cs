@@ -18,9 +18,9 @@ namespace Catalogo.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> Get()
+        public async Task<ActionResult<IEnumerable<Product>>> Get()
         {
-            var products = _context.Products.AsNoTracking().ToList();
+            var products = await _context.Products.AsNoTracking().ToListAsync();
             if(products is null)
             {
                 return NotFound("Produtos não encontrados");
@@ -29,9 +29,9 @@ namespace Catalogo.API.Controllers
         }
 
         [HttpGet("{code}", Name ="ObterProduto")]
-        public ActionResult<Product> Get(string code)
+        public async Task<ActionResult<Product>> Get(string code)
         {
-            var product = _context.Products.FirstOrDefault(p => p.Code == code);
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Code == code);
             if(product == null)
             {
                 return NotFound("Produto não encontrado");
@@ -45,7 +45,18 @@ namespace Catalogo.API.Controllers
             if(product == null)
                 return BadRequest();
 
-            _context.Products.Add(product);
+            var existingProduct = _context.Products.FirstOrDefault(p => p.Code == product.Code);
+
+            if(existingProduct != null)
+            {
+                existingProduct.Quantity++; 
+            }
+            else
+            {
+                product.Quantity = 1;
+                _context.Products.Add(product);
+            }
+
             _context.SaveChanges();
 
             return new CreatedAtRouteResult("ObterProduto",

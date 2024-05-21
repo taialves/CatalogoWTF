@@ -14,8 +14,7 @@ public class Product
     [StringLength(10)]
     public string? Code { get; set; }
 
-    [Required]
-    public int Quantity { get; set; }
+    public int Quantity { get; set; } = 1;
 
     [Required]
     [Column(TypeName = "decimal(10,2)")]
